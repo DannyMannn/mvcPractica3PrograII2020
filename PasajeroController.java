@@ -2,11 +2,12 @@ public class PasajeroController {
 	private PasajeroView vista;
 
 	public Pasajero creaPasajero(Documentacion documentacion) {
-		return new Pasajero(vista.claseEntrada,
+
+		return new Pasajero(vista.getClasePasajero(),
 				documentacion,
-				vista.edadEntrada,
-				vista.nombreEntrada,
-				vista.sexoEntrada);
+				vista.getEdadPasajero(),
+				vista.getNombrePasajero(),
+				vista.getGeneroPasajero());
 	}
 
 	public void mostrarVista() throws Exception {
