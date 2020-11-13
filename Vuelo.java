@@ -2,21 +2,28 @@ public class Vuelo {
 	private String aerolinea;
 	private String destino;
 	private int numAsiento;
-	private int numero;
+	private int numVuelo;
 	private EnumVuelo tipo;
 
 	public Vuelo(String aerolinea,
 			String destino,
 			int numAsiento,
-			int numero,
+			int numVuelo,
 			EnumVuelo tipo) {
+		initMethod(aerolinea,destino,numAsiento,numVuelo,tipo);
+	}
+	public Vuelo(){};
+	public void setAtributes(String aerolinea,String destino,int numAsiento,int numVuelo,EnumVuelo tipo){
+		initMethod(aerolinea,destino,numAsiento,numVuelo,tipo);
+	}
+
+	private void initMethod(String aerolinea,String destino,int numAsiento,int numVuelo,EnumVuelo tipo){
 		this.aerolinea = aerolinea;
 		this.destino = destino;
 		this.numAsiento = numAsiento;
-		this.numero = numero;
+		this.numVuelo = numVuelo;
 		this.tipo = tipo;
 	}
-
 	public String getAerolinea() {
 		return this.aerolinea;
 	}
@@ -29,8 +36,8 @@ public class Vuelo {
 		return this.numAsiento;
 	}
 
-	public int getNumero() {
-		return this.numero;
+	public int getNumVuelo() {
+		return this.numVuelo;
 	}
 
 	public EnumVuelo getTipo() {
@@ -49,8 +56,8 @@ public class Vuelo {
 		this.numAsiento = numAsiento;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setNumero(int numVuelo) {
+		this.numVuelo = numVuelo;
 	}
 
 	public void setTipo(EnumVuelo tipo) {
@@ -63,7 +70,7 @@ public class Vuelo {
 				this.aerolinea,
 				this.destino,
 				this.numAsiento,
-				this.numero,
+				this.numVuelo,
 				this.tipo);
 	}
 }

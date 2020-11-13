@@ -8,12 +8,20 @@ public class Pasajero {
 	private String sexo;
 
 	public Pasajero(EnumClase clase,
-			Documentacion documentacion,
+			//Documentacion documentacion,
 			int edad,
 			String nombre,
 			String sexo) {
+		initMethod(clase,edad,nombre,sexo);
+	}
+
+	public Pasajero(){};
+	public void setAtributes(EnumClase clase,int edad,String nombre,String sexo){
+		initMethod(clase, edad, nombre, sexo);
+	}
+	private void initMethod(EnumClase clase,int edad,String nombre,String sexo){
 		this.clase = clase;
-		this.documentacion = documentacion;
+		//this.documentacion = documentacion;
 		this.edad = edad;
 		this.nombre = nombre;
 		this.numMaletas = 0;

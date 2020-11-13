@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Date;
 
 public class Sistema {
 	public static void main(String[] args) {
@@ -6,44 +7,48 @@ public class Sistema {
 		String res;
 		double totalExcesoMaletas = 0;
 
-		VueloController vController = new VueloController();
-		DocumentacionController dController = new DocumentacionController();
-		PasajeroController pController = new PasajeroController();
+		VueloView vueloView = new VueloView();
+		Vuelo vuelo = new Vuelo();
+		Pasajero pasajero = new Pasajero();
+		VueloController vController = new VueloController(vueloView,vuelo,pasajero);
+
+		DocumentacionController documentacionController = new DocumentacionController();
+
+
+		PasajeroView vistaPasajero = new PasajeroView();
+		PasajeroController pasajeroController = new PasajeroController(vistaPasajero,pasajero);
+
 		MaletaController maletaController = new MaletaController();
 
-		Vuelo vuelo;
 		Documentacion documentacion;
-		Pasajero pasajero;
 		Maleta maleta;
 		Boleto boleto;
-
 		try {
-			vController.mostrarVista();
+			vueloView.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-
-		vuelo = vController.creaVuelo();
-
+		/*
 		try {
-			dController.mostrarVista(vuelo.getTipo());
+			documentacionController.mostrarVista(vuelo.getTipo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		documentacion = dController.creaDocumentacion(vuelo.getTipo());
+		documentacion = documentacionController.creaDocumentacion(vuelo.getTipo());
+		pasajero.setDocumentacion(documentacion);
 
 		try {
-			pController.mostrarVista();
+			vistaPasajero.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		pasajero = pController.creaPasajero(documentacion);
+		//pasajero = pController.creaPasajero(documentacion);
 
+		 */
 		boleto = new Boleto(pasajero, vuelo);
-
 		do {
 			System.out.println("¿Desea documentar maleta?(S/N): ");
 			res = scanner.nextLine().toLowerCase();

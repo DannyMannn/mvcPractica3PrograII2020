@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 
-public class PasajeroView extends JFrame implements ActionListener {
+public class PasajeroView extends JFrame {
     private JLabel ageLabel;
     private JTextField ageTextField;
     private JButton botonEnviar;
@@ -19,7 +19,7 @@ public class PasajeroView extends JFrame implements ActionListener {
     private JTextField nameTextField;
     private JLabel planeGUI;
     private String generoPasajero = "";
-    private String claseVueloPasajero = "";
+    private EnumClase claseVueloPasajero;
     public PasajeroView() {
         initComponents();
     }
@@ -40,7 +40,6 @@ public class PasajeroView extends JFrame implements ActionListener {
         flightClassComboBox = new JComboBox<>();
         planeGUI = new JLabel();
         botonEnviar = new JButton();
-        botonEnviar.addActionListener(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(null);
@@ -49,12 +48,7 @@ public class PasajeroView extends JFrame implements ActionListener {
         nameLabel.setText("Nombre");
         jPanel1.add(nameLabel);
         nameLabel.setBounds(40, 160, 130, 30);
-        /*
-        nameTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
-            }
-        });*/
+
         jPanel1.add(nameTextField);
         nameTextField.setBounds(40, 200, 190, 30);
 
@@ -85,7 +79,7 @@ public class PasajeroView extends JFrame implements ActionListener {
         jPanel1.add(maleRButton);
         maleRButton.setBounds(150, 330, 93, 23);
 
-        femRButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        femRButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14));
         femRButton.setText("Femenino");
         femRButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -106,15 +100,10 @@ public class PasajeroView extends JFrame implements ActionListener {
 
         flightClassComboBox.setFont(new Font("Segoe UI Emoji", 0, 12));
         flightClassComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "TURISTA", "PRIMERA_CLASE", "CLASE_EJECUTIVA" }));
-        //flightClassComboBox.addContainerListener(new ContainerAdapter() {
-          //  public void componentAdded(ContainerEvent evt) {
-            //    flightClassComboBoxComponentAdded(evt);
-            //}
-        //});
         flightClassComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox)e.getSource();
-                claseVueloPasajero = (String)cb.getSelectedItem();
+                claseVueloPasajero = EnumClase.valueOf(cb.getSelectedItem().toString());
             }
         });
         jPanel1.add(flightClassComboBox);
@@ -136,16 +125,14 @@ public class PasajeroView extends JFrame implements ActionListener {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-                                .addContainerGap())
+                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
-
         pack();
-        this.setVisible(true);
     }
 
     public String getNombrePasajero(){
@@ -160,59 +147,11 @@ public class PasajeroView extends JFrame implements ActionListener {
         return generoPasajero;
     }
 
-    public EnumClase getClasePasajero(){
-        return EnumClase.valueOf(claseVueloPasajero);
+    public EnumClase getClasePasajero() {
+        return claseVueloPasajero;
     }
 
-    private void maleRButtonActionPerformed(ActionEvent evt) {
-    }
-
-    private void femRButtonActionPerformed(ActionEvent evt) {
-    }
-
-    private void flightClassComboBoxActionPerformed(ActionEvent evt) {
-    }
-
-    private void flightClassComboBoxComponentAdded(ContainerEvent evt) {
-    }
-
-
-    //public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PasajeroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PasajeroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PasajeroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PasajeroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasajeroView().setVisible(true);
-            }
-        });*/
-        //PasajeroView gui = new PasajeroView();
-       // gui.setVisible(true);
-    //}
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JComponent comp = (JComponent) e.getSource();
-        Window win = SwingUtilities.getWindowAncestor(comp);
-        win.dispose();
+    void addSubmitListener(ActionListener listenForSubmitButton){
+        botonEnviar.addActionListener(listenForSubmitButton);
     }
 }
