@@ -12,15 +12,7 @@ public class Sistema {
 		Pasajero pasajero = new Pasajero();
 		VueloController vController = new VueloController(vueloView,vuelo,pasajero);
 
-		DocumentacionController documentacionController = new DocumentacionController();
-
-
-		PasajeroView vistaPasajero = new PasajeroView();
-		PasajeroController pasajeroController = new PasajeroController(vistaPasajero,pasajero);
-
 		MaletaController maletaController = new MaletaController();
-
-		Documentacion documentacion;
 		Maleta maleta;
 		Boleto boleto;
 		try {
@@ -28,26 +20,8 @@ public class Sistema {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		int intt = scanner.nextInt();
 
-		/*
-		try {
-			documentacionController.mostrarVista(vuelo.getTipo());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		documentacion = documentacionController.creaDocumentacion(vuelo.getTipo());
-		pasajero.setDocumentacion(documentacion);
-
-		try {
-			vistaPasajero.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		//pasajero = pController.creaPasajero(documentacion);
-
-		 */
 		boleto = new Boleto(pasajero, vuelo);
 		do {
 			System.out.println("¿Desea documentar maleta?(S/N): ");

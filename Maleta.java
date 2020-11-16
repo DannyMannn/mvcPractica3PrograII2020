@@ -1,11 +1,6 @@
 public class Maleta {
 	private double peso;
 
-	/**
-	 * Constructor de la clase.
-	 *
-	 * @param peso de la maleta.
-	 */
 	public Maleta(double peso) {
 		this.peso = peso;
 	}

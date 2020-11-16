@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
@@ -18,11 +19,11 @@ public class VueloView extends JFrame {
 	private JLabel planeGUI;
 	private JLabel seatNumLabel;
 	private JTextField seatNumTextField;
-
+	private EnumVuelo flightType = EnumVuelo.INTERNACIONAL;
 	public VueloView() {
 		initComponents();
 	}
-	private EnumVuelo flightType;
+
 
 	private void initComponents() {
 		setTitle("Registro de Boleto");
@@ -76,7 +77,7 @@ public class VueloView extends JFrame {
 		flightTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "INTERNACIONAL", "NACIONAL" }));
 
 		flightTypeComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox)e.getSource();
 				flightType = EnumVuelo.valueOf(cb.getSelectedItem().toString());
 			}
@@ -95,14 +96,13 @@ public class VueloView extends JFrame {
 		mainPanel.add(flightNumTextField);
 		flightNumTextField.setBounds(40, 360, 190, 30);
 
-		flightTypeLabel.setFont(new Font("Segoe UI Black", 0, 24)); // NOI18N
+		flightTypeLabel.setFont(new Font("Segoe UI Black", 0, 24));
 		flightTypeLabel.setText("Tipo de Vuelo");
 		mainPanel.add(flightTypeLabel);
 		flightTypeLabel.setBounds(40, 390, 210, 40);
 
 		planeGUI.setBackground(new Color(0, 0, 0));
-		planeGUI.setIcon(new ImageIcon("C:\\Users\\Daniel Sánchez V\\Documents\\GitHub\\mvcPractica3PrograII2020\\Images\\Registration.png")); // NOI18N
-		//planeGUI.setBorder(new javax.swing.border.MatteBorder(null));
+		planeGUI.setIcon(new ImageIcon("Images/Registration.png"));
 		mainPanel.add(planeGUI);
 		planeGUI.setBounds(0, -50, 420, 700);
 
@@ -111,14 +111,13 @@ public class VueloView extends JFrame {
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-								.addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+								.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
 								.addGap(0, 0, 0))
 		);
 		layout.setVerticalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
 		);
-
 		pack();
 	}
 

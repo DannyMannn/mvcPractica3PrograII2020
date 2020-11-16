@@ -1,9 +1,9 @@
 public class DocumentacionInternacional implements Documentacion {
-	private int numPasaporte;
+	private String numPasaporte;
 	private EnumVisa visa;
 	private int vigencia;
 
-	public DocumentacionInternacional(int numPasaporte,
+	public DocumentacionInternacional(String numPasaporte,
 			EnumVisa visa,
 			int vigencia) {
 		this.numPasaporte = numPasaporte;
@@ -11,7 +11,7 @@ public class DocumentacionInternacional implements Documentacion {
 		this.vigencia = vigencia;
 	}
 
-	public int getNumPasaporte() {
+	public String getNumPasaporte() {
 		return this.numPasaporte;
 	}
 
@@ -23,7 +23,7 @@ public class DocumentacionInternacional implements Documentacion {
 		return this.vigencia;
 	}
 
-	public void setNumPasaporte(int numPasaporte) {
+	public void setNumPasaporte(String numPasaporte) {
 		this.numPasaporte = numPasaporte;
 	}
 
@@ -37,7 +37,7 @@ public class DocumentacionInternacional implements Documentacion {
 
 	@Override
 	public String toString() {
-		return String.format("N. Pasaporte: %d\nVisa: %s\nVigencia: %d\n", 
+		return String.format("N. Pasaporte: %s\nVisa: %s\nVigencia: %d\n",
 				this.numPasaporte,
 				this.visa,
 				this.vigencia);

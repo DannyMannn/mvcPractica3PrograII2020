@@ -19,7 +19,7 @@ public class PasajeroView extends JFrame {
     private JTextField nameTextField;
     private JLabel planeGUI;
     private String generoPasajero = "";
-    private EnumClase claseVueloPasajero;
+    private EnumClase claseVueloPasajero = EnumClase.TURISTA;
     public PasajeroView() {
         initComponents();
     }
@@ -73,7 +73,6 @@ public class PasajeroView extends JFrame {
                     femRButton.setSelected(false);
                     generoPasajero = maleRButton.getText();
                 }
-
             }
         });
         jPanel1.add(maleRButton);
@@ -99,7 +98,7 @@ public class PasajeroView extends JFrame {
         flightClassLabel.setBounds(40, 390, 200, 30);
 
         flightClassComboBox.setFont(new Font("Segoe UI Emoji", 0, 12));
-        flightClassComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "TURISTA", "PRIMERA_CLASE", "CLASE_EJECUTIVA" }));
+        flightClassComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "TURISTA", "PRIMERA_CLASE", "EJECUTIVO" }));
         flightClassComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox)e.getSource();

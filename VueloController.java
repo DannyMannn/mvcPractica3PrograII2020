@@ -12,7 +12,6 @@ public class VueloController {
 		this.vueloModel = vuelo;
 		this.pasajero = pasajero;
 		this.vista.addSubmitListener(new SubmitListener());
-
 	}
 	class SubmitListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -28,12 +27,14 @@ public class VueloController {
 				flightNum = vista.getNumFlight();
 				flightType = vista.getFlightType();
 				vueloModel.setAtributes(airline,destination,seatNum,flightNum,flightType);
+				pasajero.setFlightType(flightType);
 			}
 			catch (Exception ex){
 				System.out.println(ex);
 				JOptionPane.showMessageDialog(null,"ERROR DE DATOS");
 			}
 			finally {
+				//cierra jpanel
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
@@ -41,7 +42,6 @@ public class VueloController {
 				PasajeroView pasajeroView = new PasajeroView();
 				PasajeroController pasajeroController = new PasajeroController(pasajeroView,pasajero);
 				pasajeroView.setVisible(true);
-
 			}
 		}
 

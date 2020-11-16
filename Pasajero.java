@@ -7,6 +7,16 @@ public class Pasajero {
 	private int numMaletas;
 	private String sexo;
 
+	public EnumVuelo getFlightType() {
+		return flightType;
+	}
+
+	public void setFlightType(EnumVuelo flightType) {
+		this.flightType = flightType;
+	}
+
+	private EnumVuelo flightType;
+
 	public Pasajero(EnumClase clase,
 			//Documentacion documentacion,
 			int edad,
