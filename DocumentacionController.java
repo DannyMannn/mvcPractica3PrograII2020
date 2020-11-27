@@ -6,12 +6,12 @@ public class DocumentacionController {
 		switch (tipoVuelo) {
 			case INTERNACIONAL:
 				return new DocumentacionInternacional(
-						internacionalVista.numPasaporteEntrada,
-						internacionalVista.visaEntrada,
-						internacionalVista.vigenciaEntrada);
+						internacionalVista.getNumPasaporteEntrada(),
+						internacionalVista.getVisaEntrada(),
+						internacionalVista.getVigenciaEntrada());
 			case NACIONAL:
 				return new DocumentacionNacional(
-						nacionalVista.curpEntrada);
+						nacionalVista.getCurpEntrada());
 		}
 		return null;
 	}
