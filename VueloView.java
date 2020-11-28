@@ -1,148 +1,88 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
+import java.util.Scanner;
 
-public class VueloView extends JFrame {
-	private JLabel airlineLabel;
-	private JTextField airlineTextField;
-	private JButton botonEnviar;
-	private JLabel destinationLabel;
-	private JTextField destinationTextField;
-	private JLabel flightNumLabel;
-	private JTextField flightNumTextField;
-	private JComboBox<String> flightTypeComboBox;
-	private JLabel flightTypeLabel;
-	private JPanel mainPanel;
-	private JLabel planeGUI;
-	private JLabel seatNumLabel;
-	private JTextField seatNumTextField;
-	private EnumVuelo flightType = EnumVuelo.INTERNACIONAL;
+public class VueloView extends JPanel {
+	private JLabel aerolineaLabel = new JLabel("Aerolinea: ");
+	private JLabel destinoVueloLabel = new JLabel("Destino: ");
+	private JLabel numAsientoLabel = new JLabel("Número de Asiento: ");
+	private JLabel numVueloLabel = new JLabel("Número de Vuelo: ");
+	private JLabel tipoVueloLabel = new JLabel("Tipo de Vuelo: ");
+	private JTextField aerolineaTextField = new JTextField(20);
+	private JTextField destinoTextField = new JTextField(20);
+	private JTextField numAsientoTextField = new JTextField(20);
+	private JTextField numVueloTextField = new JTextField(20);
+	private JTextField tipoVueloTextField = new JTextField(20);
+
+	//inicializo para ejemplificar
+	public String aerolineaVueloEntrada = "";
+	public String destinoVueloEntrada = "";
+	public int numAsientoVueloEntrada = 0;
+	public int numeroVueloEntrada = 0;
+	public EnumVuelo tipoVueloEntrada = EnumVuelo.INTERNACIONAL;
+
+	public String getAerolineaVueloEntrada() {
+		return aerolineaVueloEntrada;
+	}
+
+	public String getDestinoVueloEntrada(){
+		return aerolineaVueloEntrada;
+	}
+
+	public int getNumAsientoVueloEntrada() {
+		return numAsientoVueloEntrada;
+	}
+
+	public int getNumeroVueloEntrada() {
+		return numeroVueloEntrada;
+	}
+
+	public EnumVuelo getTipoVueloEntrada() {
+		return tipoVueloEntrada;
+	}
+
 	public VueloView() {
-		initComponents();
-	}
+		this.setLayout(new GridBagLayout());
 
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
 
-	private void initComponents() {
-		setTitle("Registro de Boleto");
-		this.setResizable(false);
-		setIconImage(new ImageIcon(getClass().getResource("/Images/plane.png")).getImage());
-		mainPanel = new JPanel();
-		airlineLabel = new JLabel();
-		airlineTextField = new JTextField();
-		destinationLabel = new JLabel();
-		destinationTextField = new JTextField();
-		seatNumLabel = new JLabel();
-		flightNumLabel = new JLabel();
-		flightTypeComboBox = new JComboBox<>();
-		botonEnviar = new JButton();
-		seatNumTextField = new JTextField();
-		flightNumTextField = new JTextField();
-		flightTypeLabel = new JLabel();
-		planeGUI = new JLabel();
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		this.add(aerolineaLabel,constraints);
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		constraints.gridx = 1;
+		this.add(aerolineaTextField,constraints);
 
-		mainPanel.setLayout(null);
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		this.add(destinoVueloLabel,constraints);
 
-		airlineLabel.setFont(new Font("Segoe UI Black", 0, 24));
-		airlineLabel.setText("Aeorlinea");
-		mainPanel.add(airlineLabel);
-		airlineLabel.setBounds(40, 120, 130, 30);
+		constraints.gridx = 1;
+		this.add(destinoTextField,constraints);
 
-		mainPanel.add(airlineTextField);
-		airlineTextField.setBounds(40, 150, 190, 30);
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		this.add(numAsientoLabel,constraints);
 
-		destinationLabel.setFont(new Font("Segoe UI Black", 0, 24));
-		destinationLabel.setText("Destino");
-		mainPanel.add(destinationLabel);
-		destinationLabel.setBounds(40, 180, 100, 40);
+		constraints.gridx = 1;
+		this.add(numAsientoTextField,constraints);
 
-		mainPanel.add(destinationTextField);
-		destinationTextField.setBounds(40, 220, 190, 30);
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		this.add(numVueloLabel,constraints);
 
-		seatNumLabel.setFont(new Font("Segoe UI Black", 0, 24));
-		seatNumLabel.setText("Número de Asiento");
-		mainPanel.add(seatNumLabel);
-		seatNumLabel.setBounds(40, 250, 250, 40);
+		constraints.gridx = 1;
+		this.add(numVueloTextField,constraints);
 
-		flightNumLabel.setFont(new Font("Segoe UI Black", 0, 24));
-		flightNumLabel.setText("Número de Vuelo");
-		mainPanel.add(flightNumLabel);
-		flightNumLabel.setBounds(40, 330, 220, 30);
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		this.add(tipoVueloLabel,constraints);
 
-		flightTypeComboBox.setFont(new Font("Segoe UI Emoji", 0, 12));
-		flightTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "INTERNACIONAL", "NACIONAL" }));
+		constraints.gridx = 1;
+		this.add(tipoVueloTextField,constraints);
 
-		flightTypeComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox cb = (JComboBox)e.getSource();
-				flightType = EnumVuelo.valueOf(cb.getSelectedItem().toString());
-			}
-		});
-		mainPanel.add(flightTypeComboBox);
-		flightTypeComboBox.setBounds(250, 400, 120, 30);
-
-		botonEnviar.setFont(new Font("Segoe UI Black", 0, 24));
-		botonEnviar.setText("ENVIAR");
-		mainPanel.add(botonEnviar);
-		botonEnviar.setBounds(130, 470, 160, 70);
-
-		mainPanel.add(seatNumTextField);
-		seatNumTextField.setBounds(40, 290, 190, 30);
-
-		mainPanel.add(flightNumTextField);
-		flightNumTextField.setBounds(40, 360, 190, 30);
-
-		flightTypeLabel.setFont(new Font("Segoe UI Black", 0, 24));
-		flightTypeLabel.setText("Tipo de Vuelo");
-		mainPanel.add(flightTypeLabel);
-		flightTypeLabel.setBounds(40, 390, 210, 40);
-
-		planeGUI.setBackground(new Color(0, 0, 0));
-		planeGUI.setIcon(new ImageIcon("Images/Registration.png"));
-		mainPanel.add(planeGUI);
-		planeGUI.setBounds(0, -50, 420, 700);
-
-		GroupLayout layout = new GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-								.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-								.addGap(0, 0, 0))
-		);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-		);
-		pack();
-	}
-
-	public String getAirline(){
-		return this.airlineTextField.getText();
-	}
-
-	public String getDestination(){
-		return this.destinationTextField.getText();
-	}
-
-	public int getNumSeat(){
-		return Integer.parseInt(this.seatNumTextField.getText());
-	}
-
-	public int getNumFlight(){
-		return Integer.parseInt(this.flightNumTextField.getText());
-	}
-
-	public EnumVuelo getFlightType(){
-		return this.flightType;
-	}
-
-	void addSubmitListener(ActionListener listenForSubmitButton){
-		botonEnviar.addActionListener(listenForSubmitButton);
+		this.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(), "VueloView"));
 	}
 }
-
